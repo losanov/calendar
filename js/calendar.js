@@ -3,9 +3,10 @@ window.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     let year = document.getElementById('year'),
-        btn = document.getElementById('button');
-
-    let months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+        btn = document.getElementById('button'),
+        months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
+        daysOfWeek = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'],
+        calendarArr = [];
 
     btn.addEventListener('click', function () {
         if (year.value != '' && year.value > 0 && year.value <= 9999) {
@@ -17,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
             btn.className = "hide-btn";
 
             let monthDiv = document.createElement('div');
-            monthDiv.className = "month-div";
+            monthDiv.className = "monthDiv";
             document.body.append(monthDiv);
 
 
@@ -28,23 +29,28 @@ window.addEventListener('DOMContentLoaded', () => {
                     monthButton.className = "button-month";
                     monthButton.innerHTML = `${months[i]}`;
                     document.body.append(monthButton);
-                    //document.body.monthDiv.appendChild(monthButton);
+                    //document.monthDiv.appendChild(monthButton);
+
                 }
             };
             getMonths();
 
-            let monthButton = document.querySelectorAll('button-month');
 
             document.body.addEventListener('click', function (event) {
                 for (let i = 0; i < months.length; i++) {
                     if (event.target && event.target.tagName == 'BUTTON' && event.target.classList.contains('button-month')) {
 
-                        console.log(event.target.innerHTML);
+                        //console.log(event.target.innerHTML);
+
+                        let monthButton = document.querySelectorAll('.button-month');
+                        for (let i = 0; i < 12; i++) {
+                            monthButton[i].classList.add("hide-btn");
+                        }
 
                         let monthNumber = function () {
                             for (let i = 0; i < months.length; i++) {
                                 if (event.target.innerHTML == months[i]) {
-                                    console.log(i + 1);
+                                    //console.log(i + 1);
                                     return (i);
                                 }
                             }
@@ -56,7 +62,13 @@ window.addEventListener('DOMContentLoaded', () => {
                             now = new Date(year.value, month),
                             firstDay = now.getDay();
 
-                        console.log(firstDay);
+                        let div = document.createElement('div');
+                        div.className = "inform";
+                        div.innerHTML = `вы выбрали ${year.value} год, месяц ${months[month]}`;
+                        document.body.append(div);
+
+
+                        //console.log(firstDay);
 
                         let lastDayOfMonth = function (year, month) {
                             let date = new Date(year.value, (month + 1), 0);
@@ -66,27 +78,33 @@ window.addEventListener('DOMContentLoaded', () => {
                         let spaceDays = [];
                         if (firstDay > 1 && firstDay < 8) {
                             for (let i = 0; i < firstDay - 1; i++) {
-                                spaceDays[i] = 'x';
+                                spaceDays[i] = '-';
                             }
                         } else if (firstDay == 0) {
                             for (let i = 0; i < 6; i++) {
-                                spaceDays[i] = 'x';
+                                spaceDays[i] = ' ';
                             }
                         }
-                        console.log(spaceDays);
+                        //console.log(spaceDays);
 
                         let daysOfMonth = [];
                         for (let i = 0; i < lastDayOfMonth(year, month); i++) {
                             daysOfMonth[i] = i + 1;
                         }
 
-                        console.log(daysOfMonth);
+                        //console.log(daysOfMonth);
 
-                        let calendarArr = [];
+                        //let calendarArr = [];
                         calendarArr = spaceDays.concat(daysOfMonth);
-                        console.log(calendarArr);
+                        //console.log(calendarArr);
 
-                        //monthNumber();
+                        getDays();
+
+                        document.createElement('div');
+                        monthDiv.className = "monthDiv";
+                        document.body.append(monthDiv);
+
+                        getCalendar();
 
                         break;
                     }
@@ -95,15 +113,51 @@ window.addEventListener('DOMContentLoaded', () => {
             });
 
 
-
-
-
-
-
         } else {
             year.value = '';
             alert('попробуй ещё');
         }
+
+        let monthDiv = document.createElement('div');
+        monthDiv.className = "monthDiv";
+        document.body.append(monthDiv);
+
+        function getDays() {
+            for (let i = 0; i < daysOfWeek.length; i++) {
+
+                let buttonDaysOfWeek = document.createElement('button');
+                buttonDaysOfWeek.className = "days-of-week";
+                buttonDaysOfWeek.innerHTML = `${daysOfWeek[i]}`;
+                document.body.append(buttonDaysOfWeek);
+            }
+        }
+
+        function getCalendar() {
+            for (let i = 0; i < calendarArr.length; i++) {
+                if (i% 7 == 0) {
+                    document.createElement('div');
+                    monthDiv.className = "monthDiv";
+                    document.body.append(monthDiv);
+
+                    let buttonCalendarDay = document.createElement('button');
+                    buttonCalendarDay.className = "calendar-days-of-week";
+                    buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
+                    document.body.append(buttonCalendarDay);
+
+                } else {
+                    let buttonCalendarDay = document.createElement('button');
+                    buttonCalendarDay.className = "calendar-days-of-week";
+                    buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
+                    document.body.append(buttonCalendarDay);
+                }
+            }
+        }
+
+
+
+
+
+
     });
 
 
