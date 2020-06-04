@@ -34,31 +34,68 @@ window.addEventListener('DOMContentLoaded', () => {
             getMonths();
 
             let monthButton = document.querySelectorAll('button-month');
-          
+
             document.body.addEventListener('click', function (event) {
                 for (let i = 0; i < months.length; i++) {
                     if (event.target && event.target.tagName == 'BUTTON' && event.target.classList.contains('button-month')) {
-                        
+
                         console.log(event.target.innerHTML);
-                        
-                        let monthNumber = function() {
+
+                        let monthNumber = function () {
                             for (let i = 0; i < months.length; i++) {
                                 if (event.target.innerHTML == months[i]) {
-                                    let t=i+1;
-                                    console.log(i+1);
+                                    console.log(i + 1);
+                                    return (i);
                                 }
                             }
                         };
                         monthNumber();
-                        
+
+                        let year = document.getElementById('year'),
+                            month = monthNumber(),
+                            now = new Date(year.value, month),
+                            firstDay = now.getDay();
+
+                        console.log(firstDay);
+
+                        let lastDayOfMonth = function (year, month) {
+                            let date = new Date(year.value, (month + 1), 0);
+                            return date.getDate();
+                        };
+
+                        let spaceDays = [];
+                        if (firstDay > 1 && firstDay < 8) {
+                            for (let i = 0; i < firstDay - 1; i++) {
+                                spaceDays[i] = 'x';
+                            }
+                        } else if (firstDay == 0) {
+                            for (let i = 0; i < 6; i++) {
+                                spaceDays[i] = 'x';
+                            }
+                        }
+                        console.log(spaceDays);
+
+                        let daysOfMonth = [];
+                        for (let i = 0; i < lastDayOfMonth(year, month); i++) {
+                            daysOfMonth[i] = i + 1;
+                        }
+
+                        console.log(daysOfMonth);
+
+                        let calendarArr = [];
+                        calendarArr = spaceDays.concat(daysOfMonth);
+                        console.log(calendarArr);
+
+                        //monthNumber();
+
                         break;
                     }
                 }
-                
+
             });
-            
-            
-            
+
+
+
 
 
 
@@ -69,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-  
+
 
 
 });

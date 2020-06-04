@@ -37,25 +37,12 @@ let calendarArr = [];
 calendarArr = spaceDays.concat(daysOfMonth);
 console.log(calendarArr);
 
-
-
-// let table = document.createElement('table'),
-//     tr = table.appendChild(document.createElement('tbody')).appendChild(document.createElement('tr'));
-// for (let i = 1; i < lastDayOfMonth(year, month); i++) {
-//     tr.appendChild(document.createElement('td'));
-//}
-
-
-
-
-    
-  
-    let div = document.createElement('div');
+let div = document.createElement('div');
     div.className = "days";
     div.innerHTML = " ' ПН '   ' ВТ '   ' СР '   ' ЧТ '   ' ПТ '   ' СБ '   ' ВС '  ";
     document.body.append(div);
 
-    let div2 = document.createElement('div2');
+let div2 = document.createElement('div2');
     div2.className = "calendar";
     div2.innerHTML = calendarArr;
     document.body.append(div2);
