@@ -6,15 +6,9 @@ body {
 }
 .box {
   position: absolute;
-  width: 200px;
+  /* width: 200px;
   height: 100px;
-  background-color: blue;
-}
-.wrapper {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  border: 3px solid red;
+  background-color: blue; */
 }
 button {
   margin-bottom: 10px;
@@ -24,33 +18,20 @@ button {
   background-color: yellow;
   border: none;
 }
+.days-of-week {
+  background-color: rgb(17, 226, 44);
+}
 .button-month {
   margin-bottom: 10px;
   margin-top: 10px;
   width: 55px;
   height: 40px;
-  background-color: green;
+  background-color: rgb(199, 127, 177);
   border: black;
   font-size: 10px;
 }
 .hide-btn {
   display: none;
-}
-.year_f {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 170px;
-  height: 50px;
-  padding: 0 10px;
-  background: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
-  border: none;
-  text-align: center;
-  font-size: 14px;
-  cursor: pointer;
-  outline: 0;
-  transition: .3s all
 }
 input[type=text]{
   width:200px;

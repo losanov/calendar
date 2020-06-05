@@ -3,13 +3,13 @@ window.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     let year = document.getElementById('year'),
-        btn = document.getElementById('button'),
+        btn = document.getElementsByClassName('btn'),
         months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
         daysOfWeek = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'],
         calendarArr = [];
 
-    btn.addEventListener('click', function () {
-        if (year.value != '' && year.value > 0 && year.value <= 9999) {
+    btn[0].addEventListener('click', function () {
+        if (year.value != '' && year.value > 0 ) {
             let div = document.createElement('div');
             div.className = "alert";
             div.innerHTML = "выберте месяц";
@@ -47,6 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             monthButton[i].classList.add("hide-btn");
                         }
 
+                        // Что-то тут не так
                         let monthNumber = function () {
                             for (let i = 0; i < months.length; i++) {
                                 if (event.target.innerHTML == months[i]) {
@@ -82,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             }
                         } else if (firstDay == 0) {
                             for (let i = 0; i < 6; i++) {
-                                spaceDays[i] = ' ';
+                                spaceDays[i] = '-';
                             }
                         }
                         //console.log(spaceDays);
@@ -94,15 +95,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         //console.log(daysOfMonth);
 
-                        //let calendarArr = [];
                         calendarArr = spaceDays.concat(daysOfMonth);
                         //console.log(calendarArr);
 
                         getDays();
 
-                        document.createElement('div');
-                        monthDiv.className = "monthDiv";
-                        document.body.append(monthDiv);
+                        // document.createElement('div');
+                        // monthDiv.className = "monthDiv";
+                        // document.body.append(monthDiv);
 
                         getCalendar();
 
@@ -111,7 +111,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
 
             });
-
 
         } else {
             year.value = '';
@@ -132,35 +131,37 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // не работает как надо перенос строки
+        // function getCalendar() {
+        //     for (let i = 0; i < calendarArr.length; i++) {
+        //         if (i% 7 == 0) {
+        //             document.createElement('div');
+        //             monthDiv.className = "monthDiv";
+        //             document.body.append(monthDiv);
+
+        //             let buttonCalendarDay = document.createElement('button');
+        //             buttonCalendarDay.className = "calendar-days-of-week";
+        //             buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
+        //             document.body.append(buttonCalendarDay);
+
+        //         } else {
+        //             let buttonCalendarDay = document.createElement('button');
+        //             buttonCalendarDay.className = "calendar-days-of-week";
+        //             buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
+        //             document.body.append(buttonCalendarDay);
+        //         }
+        //     }
+        // }
+
         function getCalendar() {
             for (let i = 0; i < calendarArr.length; i++) {
-                if (i% 7 == 0) {
-                    document.createElement('div');
-                    monthDiv.className = "monthDiv";
-                    document.body.append(monthDiv);
 
-                    let buttonCalendarDay = document.createElement('button');
-                    buttonCalendarDay.className = "calendar-days-of-week";
-                    buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
-                    document.body.append(buttonCalendarDay);
-
-                } else {
-                    let buttonCalendarDay = document.createElement('button');
-                    buttonCalendarDay.className = "calendar-days-of-week";
-                    buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
-                    document.body.append(buttonCalendarDay);
-                }
+                let buttonCalendarDay = document.createElement('button');
+                buttonCalendarDay.className = "calendar-days-of-week";
+                buttonCalendarDay.innerHTML = `${calendarArr[i]}`;
+                document.body.append(buttonCalendarDay);
             }
         }
-
-
-
-
-
-
     });
-
-
-
 
 });
